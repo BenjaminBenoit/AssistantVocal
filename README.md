@@ -25,10 +25,10 @@
 ## Set up
 
 * Télécharger et installer Anaconda avec la dernière version de Python (3.6) pour l'OS adéquat https://anaconda.org/anaconda/python
-* Install pyaudio library using command line (syntax depend on OS)
-* Install pyttsx3 library using command line
-* Install speech_recognition library using command line
-* Install scrappy library using command line
+* Installer PyAudio via Anaconda Prompt https://anaconda.org/anaconda/pyaudio
+* Installer pyttsx3 via Anaconda Prompt https://anaconda.org/auto/pyttsx
+* Installer speech_recognition via Anaconda Prompt https://anaconda.org/conda-forge/speechrecognition
+* Install scrappy library using command line https://anaconda.org/anaconda/scrapy
 
 ## Lancer l'application
 
