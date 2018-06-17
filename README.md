@@ -24,7 +24,8 @@
 
 ## Set up
 
-* Télécharger et installer Anaconda avec la dernière version de Python (3.6) pour l'OS adéquat https://anaconda.org/anaconda/python
+* Télécharger et installer Anaconda avec la dernière version de Python (3.5 ou 3.6)
+Lien pour windows : https://conda.io/docs/user-guide/install/windows.html
 * Installer PyAudio via Anaconda Prompt https://anaconda.org/anaconda/pyaudio
 * Installer pyttsx3 via Anaconda Prompt https://anaconda.org/auto/pyttsx
 * Installer speech_recognition via Anaconda Prompt https://anaconda.org/conda-forge/speechrecognition
@@ -36,8 +37,10 @@ TODO : quand le temps le permettra, faire en sorte au moment de bootstrap l'appl
 ## Lancer l'application
 
 * Cloner le repo git du projet
-* Ouvrir le fichier POC_Assistant.py dans l'IDE Spyder (fais partie du bundle téléchargé avec Anaconda)
-* Exécuter le fichier (F5 ou flèche verte)
+* Ouvrir le fichier Main.py dans l'IDE Spyder (fais partie du bundle téléchargé avec Anaconda)
+* Exécuter le fichier (F5 ou flèche verte) : l'interface va apparaître dans une fenêtre séparée
+* Cliquer Start pour donner une commande
+* Pour le moment, il faut attendre que la phrase 'Say something!' apparaisse dans la console de Spyder pour pouvoir dire quelque chose. Il faut également donner la commande rapidement. La commande comprise pour le moment est weather
 
 ## Méthodologie Git pour pusher son travail
 * télécharger Git bash
