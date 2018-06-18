@@ -14,7 +14,8 @@ class WeatherCommand:
         self.speaker = AssistantSpeaker()
             
     def executeCommand(self):
-        self.speaker.say("Please wait while I'm looking for the current temperature in Montreal")
+        self.speaker.say("Looking for the current temperature in Montreal")
+
         print("Prepare Selenium webdriver to get the weather")
         
         # Need to specify the headless option otherwise selenium will open

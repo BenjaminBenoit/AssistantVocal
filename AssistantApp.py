@@ -4,14 +4,11 @@ Created on Mon May 21 20:41:38 2018
 
 @author: Benjamin Rosa
 """
+from PyQt5.QtCore import pyqtSlot, Qt
+from PyQt5.QtWidgets import QWidget, QPushButton, QDesktopWidget, QApplication
+from CommandThread import StartActionThread
 
-from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QWidget, QPushButton, QDesktopWidget
-from Speaker import AssistantSpeaker
-from Listener import AssistantListener
-from CommandHandler import CommandHandler
-
-
+# This class setup the UI part of the application
 class AssistantApp(QWidget):
     
     def __init__(self):
@@ -22,9 +19,8 @@ class AssistantApp(QWidget):
         self.width = 320
         self.height = 200
         self.initUI()
-        self.speaker = AssistantSpeaker()
-        self.listener = AssistantListener()
-        self.commandHandler = CommandHandler()
+        self.command_thread = StartActionThread()
+        self.command_thread.signal.connect(self.on_thread_finished)
  
     def initUI(self):
         
@@ -39,17 +35,25 @@ class AssistantApp(QWidget):
         self.move(qtRectangle.topLeft())
  
         # Initialize start button
-        start_button = QPushButton('Start', self)
-        start_button.resize(200, 50)
-        start_button.move(60,75)
-        start_button.setStyleSheet('font:bold;font-size:30px;')
-        start_button.clicked.connect(self.on_start_click)
+        self.start_button = QPushButton('Start', self)
+        self.start_button.resize(200, 50)
+        self.start_button.move(60,75)
+        self.start_button.setStyleSheet('font:bold;font-size:30px;')
+        self.start_button.clicked.connect(self.on_start_click)
  
-        self.show()        
+        self.show()
+        
+    def on_thread_finished(self):
+        self.start_button.setEnabled(True)
+        QApplication.setOverrideCursor(Qt.ArrowCursor)
  
     @pyqtSlot()
     def on_start_click(self):
-        self.speaker.say("Tell me your command")
-        sentenceSaidByUser = self.listener.listen()
-        self.commandHandler.executeCommand(sentenceSaidByUser)
+        self.start_button.setEnabled(False)
+        QApplication.setOverrideCursor(Qt.WaitCursor)
+        self.command_thread.start()
+        
+
+
+        
 
