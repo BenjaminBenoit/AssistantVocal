@@ -23,5 +23,11 @@ class StartActionThread(QThread):
     def run(self):
         self.speaker.say("Tell me your command")
         sentenceSaidByUser = self.listener.listen()
-        self.commandHandler.executeCommand(sentenceSaidByUser)
+        
+        # -1 means a WaitTimeoutException occured
+        if(sentenceSaidByUser == -1):
+            self.speaker.say("Sorry, I could not understand the command")
+        else:
+            self.commandHandler.executeCommand(sentenceSaidByUser)
+            
         self.signal.emit("finished")

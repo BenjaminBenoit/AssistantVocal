@@ -32,8 +32,22 @@ class AssistantListener:
         # !!!!!!!!!!!!!!!! IMPORTANT !!!!!!!!!!!!!! : if not using a microphone, need to set the dynamic_energy_threshold and the energy_threshold
         #self.listener.dynamic_energy_threshold = False
         #self.listener.energy_threshold = 400
+        # TODO : check this link to adjust the waiting time when user speak
+        # https://github.com/Uberi/speech_recognition/blob/master/reference/library-reference.rst
+        # https://github.com/Uberi/speech_recognition#readme
         with speech_reco.Microphone(1) as source:
-            print("Say something!")
-            audio = self.instance.listener.listen(source, 1)
-            print("Sentence recorded")
+            try:
+                print("Say something!")
+                audio = self.instance.listener.listen(source, 1)
+                print("Sentence recorded")
+            except speech_reco.WaitTimeoutError:
+                print("Sentence not said fast enough - WaitTimeoutError")
+                return -1
+            except speech_reco.UnknownValueError:
+                print("Sentence said too fast - UnknownValueError")
+                return -1
+            except speech_reco.RequestError:
+                print("An exception occured - RequestError")
+                return -1                
+
         return self.listener.recognize_google(audio)

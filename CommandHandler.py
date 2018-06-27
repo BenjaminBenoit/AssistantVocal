@@ -7,12 +7,14 @@ Created on Mon May 21 20:41:38 2018
 
 from Speaker import AssistantSpeaker
 from WeatherCommand import WeatherCommand
+from MeetingCommand import MeetingCommand
 
 class CommandHandler:
     
     def __init__(self):
         self.speaker = AssistantSpeaker()
         self.weatherCommand = WeatherCommand()
+        self.meetingCommand = MeetingCommand()
             
     def executeCommand(self, sentenceSaidByUser):
         # for testing purposes, we're just using the default API key
@@ -20,6 +22,8 @@ class CommandHandler:
         # instead of `r.recognize_google(audio)`
         if(sentenceSaidByUser == "weather"):
             self.weatherCommand.executeCommand()
+        elif(sentenceSaidByUser == "meeting"):
+            self.meetingCommand.executeCommand()
         else:
             self.speaker.say("Sorry, I don't recognize this command")
             print("I don't understand")
