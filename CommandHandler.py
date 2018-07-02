@@ -8,6 +8,7 @@ Created on Mon May 21 20:41:38 2018
 from Speaker import AssistantSpeaker
 from WeatherCommand import WeatherCommand
 from MeetingCommand import MeetingCommand
+from RemindMeetingsCommand import RemindMeetingsCommand
 from AllCommandsCommand import AllCommandsCommand
 
 class CommandHandler:
@@ -16,6 +17,7 @@ class CommandHandler:
         self.speaker = AssistantSpeaker()
         self.weatherCommand = WeatherCommand()
         self.meetingCommand = MeetingCommand()
+        self.remindMeetingsCommand = RemindMeetingsCommand()
         self.allCommandsCommand = AllCommandsCommand()
             
     def executeCommand(self, sentenceSaidByUser):
@@ -27,8 +29,10 @@ class CommandHandler:
             self.weatherCommand.executeCommand()
         elif(sentenceSaidByUser == "all commands"):
             self.allCommandsCommand.executeCommand()
-        elif(sentenceSaidByUser == "meeting"):
+        elif(sentenceSaidByUser == "save meeting"):
             self.meetingCommand.executeCommand()
+        elif(sentenceSaidByUser == "remind meetings"):
+            self.remindMeetingsCommand.executeCommand()
         else:
             self.speaker.say("Sorry, I don't recognize this command. To get all the available commands, say all commands.")
             print("I don't understand")

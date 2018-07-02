@@ -14,20 +14,23 @@ from CommandHandler import CommandHandler
 class StartActionThread(QThread):
     signal = pyqtSignal('PyQt_PyObject')
     
-    def __init__(self):
+    def __init__(self, command=None):
         QThread.__init__(self)
         self.speaker = AssistantSpeaker()
         self.listener = AssistantListener()
         self.commandHandler = CommandHandler()
+        self.command = command
         
     def run(self):
-        self.speaker.say("Tell me your command")
-        sentenceSaidByUser = self.listener.listen()
+        
+        if self.command is None:
+            self.speaker.say("Tell me your command")
+            self.command = self.listener.listen()
         
         # -1 means a WaitTimeoutException occured
-        if(sentenceSaidByUser == -1):
+        if(self.command == -1):
             self.speaker.say("Sorry, I could not understand the command")
         else:
-            self.commandHandler.executeCommand(sentenceSaidByUser)
-            
+            self.commandHandler.executeCommand(self.command)
+        
         self.signal.emit("finished")

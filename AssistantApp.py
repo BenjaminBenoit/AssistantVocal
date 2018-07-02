@@ -18,12 +18,11 @@ class AssistantApp(QWidget):
         self.top = 10
         self.width = 320
         self.height = 200
-        self.initUI()
         self.command_thread = StartActionThread()
         self.command_thread.signal.connect(self.on_thread_finished)
+        self.initUI()
  
     def initUI(self):
-        
         # Initialize window running the app
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
@@ -42,10 +41,15 @@ class AssistantApp(QWidget):
         self.start_button.clicked.connect(self.on_start_click)
  
         self.show()
+
+        #self.informUserAboutMeetings()
         
     def on_thread_finished(self):
         self.start_button.setEnabled(True)
         QApplication.setOverrideCursor(Qt.ArrowCursor)
+        self.command_thread.terminate()
+        self.command_thread = StartActionThread()
+        self.command_thread.signal.connect(self.on_thread_finished)
  
     @pyqtSlot()
     def on_start_click(self):
@@ -53,7 +57,8 @@ class AssistantApp(QWidget):
         QApplication.setOverrideCursor(Qt.WaitCursor)
         self.command_thread.start()
         
-
-
-        
-
+    #def informUserAboutMeetings(self):
+     #   print("DANS INFORM ABOUT MEETING")
+      #  self.start_button.setEnabled(False)
+      #  QApplication.setOverrideCursor(Qt.WaitCursor)
+      #  self.command_thread.start()     

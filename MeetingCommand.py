@@ -16,6 +16,7 @@ class MeetingCommand:
     def __init__(self):
         self.speaker = AssistantSpeaker()
         self.listener = AssistantListener()
+        self.dateFormat = "%Y %B %d %H %M"
         self.jsonFileName = "meeting_data.txt"
         self.jsonFilePath = "./meeting_data.txt"
         
@@ -77,7 +78,7 @@ class MeetingCommand:
     
     def saveNewMeeting(self, dateOfMeeting, subjectOfMeeting):
         currentJsonData = self.getJsonDataFromJsonFile()
-        dateOfMeetingInString = dateOfMeeting.strftime("%Y %B %d %H %M")
+        dateOfMeetingInString = dateOfMeeting.strftime(self.dateFormat)
 
         if dateOfMeetingInString not in currentJsonData:
             currentJsonData[dateOfMeetingInString] = subjectOfMeeting

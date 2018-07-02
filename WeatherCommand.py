@@ -24,15 +24,12 @@ class WeatherCommand:
         options.add_argument("headless")
         driver = webdriver.Chrome(executable_path=r"C:\Program Files (x86)\Chrome\chromedriver.exe", chrome_options=options)
         driver.get("https://www.meteomedia.com/ca/meteo/quebec/montreal")
-    
+        
         spanWithTemperature = driver.find_elements_by_xpath('.//span[@class = "temp"]')[0]
         print(spanWithTemperature.text)
-        
+  
         self.speaker.say("The temperature is currently " + spanWithTemperature.text + "degree")
-        
+        print('Quit driver')
         # Important to close the driver to avoid having multiple chrome tasks
         # opened at the same time        
         driver.quit()
-        
-
-        
