@@ -7,7 +7,7 @@ Created on Mon May 21 20:41:38 2018
 import json
 import datetime
 
-from pathlib import Path
+from Util import JsonFileUtil
 from Speaker import AssistantSpeaker
 from Listener import AssistantListener
 
@@ -17,18 +17,7 @@ class MeetingCommand:
         self.speaker = AssistantSpeaker()
         self.listener = AssistantListener()
         self.dateFormat = "%Y %B %d %H %M"
-        self.jsonFileName = "meeting_data.txt"
-        self.jsonFilePath = "./meeting_data.txt"
-        
-        
-    def getJsonDataFromJsonFile(self):
-        jsonFile = Path(self.jsonFilePath)
-        if(jsonFile.is_file()):
-            with open(self.jsonFileName, 'r') as currentJsonFile:
-                currentJsonData = json.load(currentJsonFile)
-        else:
-            currentJsonData = {}
-        return currentJsonData
+        self.meetingJsonFile = JsonFileUtil("meeting_data.txt", "./meeting_data.txt")
     
     
     def getMeetingDateFromUser(self):
@@ -77,7 +66,7 @@ class MeetingCommand:
     
     
     def saveNewMeeting(self, dateOfMeeting, subjectOfMeeting):
-        currentJsonData = self.getJsonDataFromJsonFile()
+        currentJsonData = self.meetingJsonFile.getData()
         dateOfMeetingInString = dateOfMeeting.strftime(self.dateFormat)
 
         if dateOfMeetingInString not in currentJsonData:

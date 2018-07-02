@@ -7,6 +7,8 @@ Created on Mon May 21 20:41:38 2018
 from PyQt5.QtCore import pyqtSlot, Qt
 from PyQt5.QtWidgets import QWidget, QPushButton, QDesktopWidget, QApplication
 from CommandThread import StartActionThread
+from Util import JsonFileUtil
+from Speaker import AssistantSpeaker
 
 # This class setup the UI part of the application
 class AssistantApp(QWidget):
@@ -20,6 +22,7 @@ class AssistantApp(QWidget):
         self.height = 200
         self.command_thread = StartActionThread()
         self.command_thread.signal.connect(self.on_thread_finished)
+        self.speaker = AssistantSpeaker()
         self.initUI()
  
     def initUI(self):
@@ -39,10 +42,9 @@ class AssistantApp(QWidget):
         self.start_button.move(60,75)
         self.start_button.setStyleSheet('font:bold;font-size:30px;')
         self.start_button.clicked.connect(self.on_start_click)
- 
+        
+        self.welcomingUser()
         self.show()
-
-        #self.informUserAboutMeetings()
         
     def on_thread_finished(self):
         self.start_button.setEnabled(True)
@@ -57,8 +59,8 @@ class AssistantApp(QWidget):
         QApplication.setOverrideCursor(Qt.WaitCursor)
         self.command_thread.start()
         
-    #def informUserAboutMeetings(self):
-     #   print("DANS INFORM ABOUT MEETING")
-      #  self.start_button.setEnabled(False)
-      #  QApplication.setOverrideCursor(Qt.WaitCursor)
-      #  self.command_thread.start()     
+    def welcomingUser(self):
+        jsonFile = JsonFileUtil("app_properties.txt", "./app_properties.txt")
+        userName = jsonFile.getValue("user name")
+        self.speaker.say("Welcome " + userName)
+        
