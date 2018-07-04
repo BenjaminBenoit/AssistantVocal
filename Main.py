@@ -28,5 +28,5 @@ if __name__ == '__main__':
     print(pyaudio.pa.get_default_input_device())
     
     app = QApplication(sys.argv)
-    ex = AssistantApp()
+    ex = AssistantApp(app)
     sys.exit(app.exec_())

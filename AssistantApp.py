@@ -4,6 +4,7 @@ Created on Mon May 21 20:41:38 2018
 
 @author: Benjamin Rosa
 """
+import sys
 from PyQt5.QtCore import pyqtSlot, Qt
 from PyQt5.QtWidgets import QWidget, QPushButton, QDesktopWidget, QApplication
 from CommandThread import StartActionThread
@@ -13,7 +14,7 @@ from Speaker import AssistantSpeaker
 # This class setup the UI part of the application
 class AssistantApp(QWidget):
     
-    def __init__(self):
+    def __init__(self, app):
         super().__init__()
         self.title = 'Personal Assistant'
         self.left = 10
@@ -23,6 +24,7 @@ class AssistantApp(QWidget):
         self.command_thread = StartActionThread()
         self.command_thread.signal.connect(self.on_thread_finished)
         self.speaker = AssistantSpeaker()
+        self.app = app
         self.initUI()
  
     def initUI(self):
@@ -45,6 +47,9 @@ class AssistantApp(QWidget):
         
         self.welcomingUser()
         self.show()
+        
+    def closeEvent(self, event):
+        sys.exit(self.app.exec_())
         
     def on_thread_finished(self):
         self.start_button.setEnabled(True)
