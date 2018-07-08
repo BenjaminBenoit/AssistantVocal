@@ -6,7 +6,7 @@ Created on Mon May 21 20:41:38 2018
 """
 import sys
 from PyQt5.QtCore import pyqtSlot, Qt
-from PyQt5.QtWidgets import QWidget, QPushButton, QDesktopWidget, QApplication
+from PyQt5.QtWidgets import QWidget, QPushButton, QDesktopWidget, QApplication, QListWidget, QLabel
 from CommandThread import StartActionThread
 from Util import JsonFileUtil
 from Speaker import AssistantSpeaker
@@ -19,8 +19,8 @@ class AssistantApp(QWidget):
         self.title = 'Personal Assistant'
         self.left = 10
         self.top = 10
-        self.width = 320
-        self.height = 200
+        self.width = 310
+        self.height = 250
         self.command_thread = StartActionThread()
         self.command_thread.signal.connect(self.on_thread_finished)
         self.speaker = AssistantSpeaker()
@@ -39,11 +39,29 @@ class AssistantApp(QWidget):
         self.move(qtRectangle.topLeft())
  
         # Initialize start button
-        self.start_button = QPushButton('Start', self)
-        self.start_button.resize(200, 50)
-        self.start_button.move(60,75)
+        self.start_button = QPushButton('Speak', self)
+        self.start_button.resize(250, 50)
+        self.start_button.move(30,180)
         self.start_button.setStyleSheet('font:bold;font-size:30px;')
         self.start_button.clicked.connect(self.on_start_click)
+        
+        # Command list title
+        self.command_list_title = QLabel("Command list", self)
+        self.command_list_title.setStyleSheet('font:bold;font-size:30px;')
+        self.command_list_title.resize(250,50)
+        self.command_list_title.move(20,5)
+        self.command_list_title.setAlignment(Qt.AlignCenter)
+
+        # Command list
+        self.commandList = QListWidget(self)
+        self.commandList.resize(150,110)
+        self.commandList.move(75,60)
+        self.commandList.addItem("All commands")
+        self.commandList.addItem("Change parameters")
+        self.commandList.addItem("Weather")
+        self.commandList.addItem("Save meeting")
+        self.commandList.addItem("Remind meetings")
+        self.commandList.addItem("Help")
         
         self.welcomingUser()
         self.show()
