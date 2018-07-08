@@ -4,7 +4,7 @@ Created on Mon May 21 20:41:38 2018
 
 @author: Benjamin Rosa
 """
-
+from HelpCommand import HelpCommand
 from Speaker import AssistantSpeaker
 from WeatherCommand import WeatherCommand
 from MeetingCommand import MeetingCommand
@@ -21,7 +21,8 @@ class CommandHandler:
         self.meetingCommand = MeetingCommand()
         self.remindMeetingsCommand = RemindMeetingsCommand()
         self.allCommandsCommand = AllCommandsCommand()
-        self.changeParameterCommands = ChangeParametersCommand()
+        self.changeParameterCommand = ChangeParametersCommand()
+        self.helpCommand = HelpCommand()
             
     def executeCommand(self, sentenceSaidByUser):
         print(sentenceSaidByUser)
@@ -37,7 +38,9 @@ class CommandHandler:
         elif(sentenceSaidByUser == "remind meetings"):
             self.remindMeetingsCommand.executeCommand()
         elif(sentenceSaidByUser == "change parameters"):
-            self.changeParameterCommands.executeCommand()
+            self.changeParameterCommand.executeCommand()
+        elif(sentenceSaidByUser == "help"):
+            self.helpCommand.executeCommand()        
         else:
             self.speaker.say("Sorry, I don't recognize this command. To get all the available commands, say all commands.")
             print("I don't understand")

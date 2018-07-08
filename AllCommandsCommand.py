@@ -14,7 +14,7 @@ class AllCommandsCommand:
         self.speaker = AssistantSpeaker()
             
     def executeCommand(self):
-        self.speaker.say("The available commands are : All commands, Help, Save meeting, Remind meetings and Weather. For more informations about a command, say help.")
+        self.speaker.say("The available commands are : All commands, Change parameters, Help, Save meeting, Remind meetings and Weather. For more informations about a command, say help.")
         
 
         
