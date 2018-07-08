@@ -36,9 +36,10 @@ class RemindMeetingsCommand:
             meetingDateTime = datetime.datetime.strptime(meetingKey, self.dateFormat)
             meetingDate = meetingDateTime.date()
             # The date comparison can only be made on datetime.date objects and not on datetime.datetime!
-            if(maximumDateForReminder >= meetingDate):
+            if(maximumDateForReminder >= meetingDate and meetingDate >= currentDate):
                 meetingValue = self.meetingJsonFile.getValue(meetingKey)
                 self.speaker.say(meetingValue + ' is due for ' + meetingKey)
+        self.speaker.say("All the meetings coming in the next " + numberOfDaysBeforeMeetingReminder + " days have been said")
         
     def executeCommand(self):
         self.speaker.say("Reminding the upcoming meetings.")
