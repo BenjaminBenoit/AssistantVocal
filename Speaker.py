@@ -21,7 +21,7 @@ class AssistantSpeaker:
                 self.engine = pyttsx3.init()
                 
                 # voice speed rate. By default it is 200 word per minute which is a little bit too fast
-                self.engine.setProperty('rate', 160)
+                self.engine.setProperty('rate', 180)
 
                 # By default, the engine voice is the one of the OS (so French for me), since the command are in english, to have a 
                 # good pronounciation, it's important to set the engine voice in english

@@ -59,6 +59,7 @@ class AssistantApp(QWidget):
         self.commandList.addItem("All commands")
         self.commandList.addItem("Change parameters")
         self.commandList.addItem("Weather")
+        self.commandList.addItem("Time")
         self.commandList.addItem("Save meeting")
         self.commandList.addItem("Remind meetings")
         self.commandList.addItem("Help")
