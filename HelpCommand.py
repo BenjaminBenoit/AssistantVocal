@@ -23,6 +23,8 @@ class HelpCommand:
             self.speaker.say("Simply say weather and you will have the current temperature in Montreal.")
         elif command_for_help == 'change parameters':
             self.speaker.say("After saying the command name, you will be ask to say the parameter name and the parameter value.")
+        elif command_for_help == 'time':
+            self.speaker.say("After saying the command name, you will be ask to say the name of the city. You will then hear the current time of the most likely city found.")
         elif command_for_help == 'all commands':
             self.speaker.say("Give all the available commands in the application.")
         elif command_for_help == 'remind meetings':
