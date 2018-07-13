@@ -4,7 +4,7 @@ Created on Mon May 21 20:41:38 2018
 
 @author: Benjamin Rosa
 """
-
+import Constants
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from Speaker import AssistantSpeaker
@@ -30,12 +30,12 @@ class TimeCommand:
     def getTimeFromWebSite(self, city):
         
         options = webdriver.ChromeOptions()
-        options.add_argument("headless")
-        driver = webdriver.Chrome(executable_path=r"C:\Program Files (x86)\Chrome\chromedriver.exe", chrome_options=options)
-        driver.get("https://www.timeanddate.com/worldclock/?query="+city)
+        options.add_argument(Constants.DRIVER_ARGUMENT)
+        driver = webdriver.Chrome(executable_path=Constants.DRIVER_EXEC_PATH, chrome_options=options)
+        driver.get(Constants.TIME_URL + city)
         
         # Use beautifulSoup to parse the source page for better performance
-        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        soup = BeautifulSoup(driver.page_source, Constants.BEAUTIFUL_SOUP_PARSER)
         answer = soup.find('td', id='p0')
         
         print('Quit driver')

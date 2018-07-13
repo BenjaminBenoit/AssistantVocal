@@ -5,6 +5,7 @@ Created on Mon May 21 20:41:38 2018
 @author: Benjamin Rosa
 """
 import sys
+import Constants
 from PyQt5.QtCore import pyqtSlot, Qt
 from PyQt5.QtWidgets import QWidget, QPushButton, QDesktopWidget, QApplication, QListWidget, QLabel
 from CommandThread import StartActionThread
@@ -84,7 +85,7 @@ class AssistantApp(QWidget):
         self.command_thread.start()
         
     def welcomingUser(self):
-        jsonFile = JsonFileUtil("app_properties.txt", "./app_properties.txt")
+        jsonFile = JsonFileUtil(Constants.APP_PROPERTIES_FILENAME, Constants.APP_PROPERTIES_PATH)
         userName = jsonFile.getValue("user name")
         self.speaker.say("Welcome " + userName)
         

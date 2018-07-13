@@ -6,6 +6,7 @@ Created on Mon May 21 20:41:38 2018
 """
 
 import pyttsx3
+import Constants
 import speech_recognition as sr
 
 # This class is used for the assistant to speak to the user
@@ -17,17 +18,17 @@ class AssistantSpeaker:
                 # For windows, the driver is sapi5. It's nsss for OSX and espeak for other OS
                 # Even if optional, need to specify the driver otherwise an error occur
                 # Was needed before to init with driverName, but not anymore, check why ?
-                self.engine = pyttsx3.init(driverName="sapi5")
+                self.engine = pyttsx3.init(driverName=Constants.PYTTSX3_DRIVER_NAME)
                 self.engine = pyttsx3.init()
                 
                 # voice speed rate. By default it is 200 word per minute which is a little bit too fast
-                self.engine.setProperty('rate', 180)
+                self.engine.setProperty('rate', Constants.PYTTSX3_SPEECH_RATE)
 
                 # By default, the engine voice is the one of the OS (so French for me), since the command are in english, to have a 
                 # good pronounciation, it's important to set the engine voice in english
                 # TODO : create a separate file with methods to initialize the engine. the init method
                 # should take a param like EN or FR and set the right voices
-                self.engine.setProperty('voice', "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0")
+                self.engine.setProperty('voice', Constants.PYTTSX3_VOICE_PATH)
                 
             except sr.UnknownValueError:
                 print("Google Speech Recognition could not understand audio")

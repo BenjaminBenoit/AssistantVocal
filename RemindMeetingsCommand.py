@@ -6,6 +6,7 @@ Created on Mon May 21 20:41:38 2018
 """
 
 import datetime
+import Constants
 
 from Util import JsonFileUtil
 from Speaker import AssistantSpeaker
@@ -16,10 +17,10 @@ class RemindMeetingsCommand:
     def __init__(self):
         self.speaker = AssistantSpeaker()
         self.listener = AssistantListener()
-        self.dateFormat = "%Y %B %d %H %M"
-        self.appJsonFile = JsonFileUtil("app_properties.txt", "./app_properties.txt")
-        self.meetingJsonFile = JsonFileUtil("meeting_data.txt", "./meeting_data.txt")
-        self.intervalMeetingReminderKey = "interval meeting reminder"
+        self.dateFormat = Constants.MEETING_DATE_FORMAT
+        self.appJsonFile = JsonFileUtil(Constants.APP_PROPERTIES_FILENAME, Constants.APP_PROPERTIES_PATH)
+        self.meetingJsonFile = JsonFileUtil(Constants.MEETING_FILENAME, Constants.MEETING_FILEPATH)
+        self.intervalMeetingReminderKey = Constants.APP_PROP_INTERVALMEETING_PARAM
         
     # The app_properties file contain all the properties for the app
     # Return the number of days before a meeting we want the reminder to be triggered

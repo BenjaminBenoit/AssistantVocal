@@ -4,6 +4,7 @@ Created on Mon May 21 20:41:38 2018
 
 @author: Benjamin Rosa
 """
+import Constants
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from Speaker import AssistantSpeaker
@@ -20,13 +21,13 @@ class WeatherCommand:
         # a chrome window and we don't want that
         # Cannot use urllib here because span content is dynamic
         options = webdriver.ChromeOptions()
-        options.add_argument("headless")
-        driver = webdriver.Chrome(executable_path=r"C:\Program Files (x86)\Chrome\chromedriver.exe", chrome_options=options)
-        driver.get("https://www.meteomedia.com/ca/meteo/quebec/montreal")
+        options.add_argument(Constants.DRIVER_ARGUMENT)
+        driver = webdriver.Chrome(executable_path=Constants.DRIVER_EXEC_PATH, chrome_options=options)
+        driver.get(Constants.WEATHER_URL)
         
         # Use beautiful soup to parse the html page to speed up the process
         # Beautiful soup has a faster parser than Selenium
-        beautiful_soup = BeautifulSoup(driver.page_source, 'html.parser')
+        beautiful_soup = BeautifulSoup(driver.page_source, Constants.BEAUTIFUL_SOUP_PARSER)
         spanWithTemperature = beautiful_soup.find_all('span', {'class' : 'temp'})[0]
         print(spanWithTemperature.text)
   

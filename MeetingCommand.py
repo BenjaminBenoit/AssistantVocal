@@ -6,6 +6,7 @@ Created on Mon May 21 20:41:38 2018
 """
 import json
 import datetime
+import Constants
 
 from Util import JsonFileUtil
 from Speaker import AssistantSpeaker
@@ -16,8 +17,8 @@ class MeetingCommand:
     def __init__(self):
         self.speaker = AssistantSpeaker()
         self.listener = AssistantListener()
-        self.dateFormat = "%Y %B %d %H %M"
-        self.meetingJsonFile = JsonFileUtil("meeting_data.txt", "./meeting_data.txt")
+        self.dateFormat = Constants.MEETING_DATE_FORMAT
+        self.meetingJsonFile = JsonFileUtil(Constants.MEETING_FILENAME, Constants.MEETING_FILEPATH)
     
     
     def getMeetingDateFromUser(self):
@@ -75,7 +76,7 @@ class MeetingCommand:
             currentMeetingsForDate = currentJsonData[dateOfMeetingInString]
             currentJsonData[dateOfMeetingInString] = currentMeetingsForDate + " and you also have " + subjectOfMeeting
         
-        with open('meeting_data.txt', 'w+') as file:
+        with open(Constants.MEETING_FILENAME, 'w+') as file:
             json.dump(currentJsonData, file, ensure_ascii=False)
                 
         self.speaker.say("Meeting successfully saved")
