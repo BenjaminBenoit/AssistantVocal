@@ -5,6 +5,7 @@ Created on Mon May 21 20:41:38 2018
 @author: Benjamin Rosa
 """
 
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from Speaker import AssistantSpeaker
 from Listener import AssistantListener
@@ -19,51 +20,29 @@ class TimeCommand:
         self.speaker.say("For which city do you want the current time ?")
         city = self.listener.listen()
         print(city)
+        self.speaker.say("Please wait while I'm looking for the current time in " + city)
         print("Prepare Selenium webdriver to get the time")
         
-        driver = self.initializeDriver()
+        string_current_time_city = self.getTimeFromWebSite(city)
         
-        answer = self.getTimeFromWebSite(driver, city)
-        am_pm_city_time = self.getTimeInAmPmFormat(answer)
+        self.speaker.say("In " + city + " it is " + string_current_time_city + " o'clock.")
         
-        self.speaker.say("In " + city + " it is " + am_pm_city_time + " o'clock.")
+    def getTimeFromWebSite(self, city):
+        
+        options = webdriver.ChromeOptions()
+        options.add_argument("headless")
+        driver = webdriver.Chrome(executable_path=r"C:\Program Files (x86)\Chrome\chromedriver.exe", chrome_options=options)
+        driver.get("https://www.timeanddate.com/worldclock/?query="+city)
+        
+        # Use beautifulSoup to parse the source page for better performance
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        answer = soup.find('td', id='p0')
         
         print('Quit driver')
         # Important to close the driver to avoid having multiple chrome tasks
         # opened at the same time        
         driver.quit()
         
-    def initializeDriver(self):
-        # Need to specify the headless option otherwise selenium will open
-        # a chrome window and we don't want that
-        options = webdriver.ChromeOptions()
-        options.add_argument("headless")
-        driver = webdriver.Chrome(executable_path=r"C:\Program Files (x86)\Chrome\chromedriver.exe", chrome_options=options)
-        driver.get("https://www.timeanddate.com/worldclock/")
-        return driver        
-        
-    def getTimeFromWebSite(self, driver, city):
-        inputFieldForCity = driver.find_element_by_xpath('.//input[@class="inline nine"]')
-        searchButton = driver.find_element_by_xpath('.//input[@value = "Search"]')
-        inputFieldForCity.click()
-        inputFieldForCity.send_keys(city)
-        searchButton.click()
-        answer = driver.find_element_by_xpath('.//td[@id="p0"]')
-        print(answer.text)
-        return answer
-        
-    def getTimeInAmPmFormat(self, answer):
-        # The answer is of form 'day hour h minute'. we parse it through each white space
-        parse_answer = answer.text.split()
-        # when running headless, the web browser return the time in am-pm frmat already
-        print('printing parse answer')
-        print(parse_answer[1] + ' ' + parse_answer[2])
-        return parse_answer[1] + ' ' + parse_answer[2]
-        
-        # if driver is not running headless, may need this time conversion if OS is in french
-        #hour = int(parse_answer[1])
-        #minute = int(parse_answer[3])
-        #city_time = datetime.time(hour, minute)
-        # Format the hour in am-pm with %I. %p will display the AM or PM information
-        #return city_time.strftime('%I:%M %p')
-        
+        # Date is with format 'Day Hour:Minute AM'
+        splited_answer = answer.text.split()
+        return splited_answer[1] + ' ' + splited_answer[2]
