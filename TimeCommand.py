@@ -19,6 +19,9 @@ class TimeCommand:
     def executeCommand(self):
         self.speaker.say("For which city do you want the current time ?")
         city = self.listener.listen()
+        if city == -1:
+            self.speaker.say("Sorry I did not understand the name of the city.")
+            return -1
         print(city)
         self.speaker.say("Please wait while I'm looking for the current time in " + city)
         print("Prepare Selenium webdriver to get the time")

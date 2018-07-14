@@ -14,40 +14,32 @@ class AssistantListener:
         def __init__(self):
             # obtain audio from the microphone
             self.listener = speech_reco.Recognizer()
+            self.microphone = speech_reco.Microphone()
     
     instance = None
     def __init__(self):
         if not AssistantListener.instance:
+            print(speech_reco.Microphone.list_microphone_names())
             AssistantListener.instance = AssistantListener.__AssistantListenerSingleton()
     
     def __getattr__(self, name):
         return getattr(self.instance, name)
 
     def listen(self):
-        # Important note
-        # If there is too much noise in the microphone, the listener will be stuck on the listen phase
-        # because he will think that the user is not done speaking (because of the noise)
-        # The way to overcome this issue is to set the dynamic energy threshold at false
-        # and to put the energy threshold at 400 (anythong less than that won't work)
-        # !!!!!!!!!!!!!!!! IMPORTANT !!!!!!!!!!!!!! : if not using a microphone, need to set the dynamic_energy_threshold and the energy_threshold
-        #self.listener.dynamic_energy_threshold = False
-        #self.listener.energy_threshold = 400
-        # TODO : check this link to adjust the waiting time when user speak
-        # https://github.com/Uberi/speech_recognition/blob/master/reference/library-reference.rst
-        # https://github.com/Uberi/speech_recognition#readme
-        with speech_reco.Microphone(1) as source:
-            try:
-                print("Say something!")
-                audio = self.instance.listener.listen(source, 1)
-                print("Sentence recorded")
-            except speech_reco.WaitTimeoutError:
+        
+        with self.microphone as source:
+            self.instance.listener.adjust_for_ambient_noise(source)
+            audio = self.instance.listener.listen(source)
+            
+        try:
+            transcription = self.instance.listener.recognize_google(audio)
+        except speech_reco.WaitTimeoutError:
                 print("Sentence not said fast enough - WaitTimeoutError")
                 return -1
-            except speech_reco.UnknownValueError:
+        except speech_reco.UnknownValueError:
                 print("Sentence said too fast - UnknownValueError")
                 return -1
-            except speech_reco.RequestError:
+        except speech_reco.RequestError:
                 print("An exception occured - RequestError")
-                return -1                
-
-        return self.listener.recognize_google(audio)
+                return -1 
+        return transcription

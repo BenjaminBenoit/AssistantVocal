@@ -1,0 +1,44 @@
+missing module named resource - imported by posix, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named posix - imported by os, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named _posixsubprocess - imported by subprocess, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named org - imported by pickle, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named readline - imported by cmd, code, pdb, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+excluded module named _frozen_importlib - imported by importlib, importlib.abc, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named _frozen_importlib_external - imported by importlib._bootstrap, importlib, importlib.abc, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named _winreg - imported by platform, selenium.webdriver.firefox.firefox_binary, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named _scproxy - imported by urllib.request
+missing module named java - imported by platform, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named 'java.lang' - imported by platform, xml.sax._exceptions, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named vms_lib - imported by platform, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named termios - imported by tty, getpass, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named urllib.urlencode - imported by urllib, speech_recognition
+missing module named grp - imported by shutil, tarfile, pathlib, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named pwd - imported by posixpath, shutil, tarfile, http.server, webbrowser, netrc, getpass, pathlib, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named _dummy_threading - imported by dummy_threading, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named 'org.python' - imported by copy, xml.sax, C:\Users\Admin\Desktop\MTI815\Projet\Main.py
+missing module named monotonic - imported by speech_recognition
+missing module named 'googleapiclient.http' - imported by speech_recognition
+missing module named 'googleapiclient.errors' - imported by speech_recognition
+missing module named googleapiclient - imported by speech_recognition
+missing module named oauth2client - imported by speech_recognition
+missing module named pocketsphinx - imported by speech_recognition
+missing module named snowboydetect - imported by speech_recognition
+missing module named urllib2 - imported by speech_recognition, selenium.webdriver.common.utils, selenium.webdriver.remote.remote_connection, selenium.webdriver.common.service
+missing module named 'win32com.gen_py' - imported by win32com
+missing module named PyObjCTools - imported by pyttsx3.drivers.nsss
+missing module named AppKit - imported by pyttsx3.drivers.nsss
+missing module named Foundation - imported by pyttsx3.drivers.nsss
+missing module named StringIO - imported by six, selenium.webdriver.remote.webelement, pyttsx3.six
+missing module named urlparse - imported by selenium.webdriver.remote.remote_connection
+missing module named httplib - imported by selenium.webdriver.firefox.webdriver, selenium.webdriver.remote.remote_connection, selenium.webdriver.safari.webdriver, selenium.webdriver.blackberry.webdriver, selenium.webdriver.webkitgtk.webdriver
+missing module named cStringIO - imported by selenium.webdriver.firefox.firefox_profile
+missing module named copy_reg - imported by cStringIO
+missing module named iconv_codec - imported by bs4.dammit
+missing module named cchardet - imported by bs4.dammit
+missing module named html5lib.treebuilders.base - imported by html5lib.treebuilders, bs4.builder._html5lib
+missing module named ordereddict - imported by html5lib.treewalkers.etree, html5lib.filters.alphabeticalattributes
+runtime module named six.moves - imported by html5lib.inputstream, html5lib.sanitizer
+missing module named 'genshi.core' - imported by html5lib.treewalkers.genshistream
+missing module named genshi - imported by html5lib.treewalkers.genshistream
+missing module named datrie - imported by html5lib.trie.datrie
+missing module named charade - imported by html5lib.inputstream
