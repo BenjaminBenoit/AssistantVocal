@@ -48,7 +48,7 @@ Lien pour windows : https://conda.io/docs/user-guide/install/windows.html
 
 ## Lancer l'application avec l'exécutable
 * Aller dans le fichier dist
-* Double cliquer sur Main.exe (cet exécutable est seulement compatible Windows 10)
+* Double cliquer sur Main.exe (cet exécutable est seulement compatible Windows 10) Il est parfois nécessaire de relancer l'exécutable une seconde fois.
 
 ## Méthodologie Git pour pusher son travail
 * télécharger Git bash
